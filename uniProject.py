@@ -38,15 +38,14 @@ class Student:
 studentList = []
 
 #* functions *#
-
 def helperFn():
     print("""
-            type help or '-h' for help.
-            type 'addStudent' or '-add' to add a new student.
-            type 'getStudents' or '-getAll' to get all of the students.
-            type 'getStudentByNumber' or '-getByNum' to find e specific.
-            type 'exportAll' or '-xAll' to export all the data to a text file.
-            type 'queit' or 'exit' to exit.
+            >type 'help' or '-h' for help.
+            >type 'addStudent' or '-add' to add a new student.
+            >type 'getStudents' or '-getAll' to get all of the students.
+            >type 'getStudentByNumber' or '-getByNum' to find e specific.
+            >type 'exportAll' or '-xAll' to export all the data to a text file.
+            >type 'queit' or 'exit' to exit.
         """)
 
 def addStudent():
@@ -71,21 +70,21 @@ def getStudentByNumber():
     inputNumber = input('your student number: ')
 
     for student in studentList:
-        if str(student.getNumber()) == inputNumber:
+        if str(student.getNumber()) == str(inputNumber):
             foundedStudent = student
 
     if foundedStudent == '':
         print('student by this number does not exist \n')
-        return
+        return #exits the function
     
     def helperFn():
         print("""
-            type help or '-h' for help.
-            type 'changeName' or '-cName' to change the name.
-            type 'changeAge' or '-cAge' to change the name.
-            type 'changeMajor' or '-cMajor' to change the name.
-            type 'changeNumber' or '-cNumber' to change the name.
-            type 'queit' or 'exit' to exit.
+            -type 'help' or '-h' for help.
+            -type 'changeName' or '-cName' to change the name.
+            -type 'changeAge' or '-cAge' to change the name.
+            -type 'changeMajor' or '-cMajor' to change the name.
+            -type 'changeNumber' or '-cNumber' to change the name.
+            -type 'queit' or 'exit' to exit.
         """)
 
     def changeName():
@@ -108,7 +107,8 @@ def getStudentByNumber():
         foundedStudent.changeNumber(newValue)
         print(f'number has been successfully changed to {newValue}\n')
 
-    swtichKeys = { 
+  #* Switch Keys *#  
+    switchKeys = { 
         'help': helperFn, # getting help #
         '-h': helperFn,
         'changeName': changeName,
@@ -121,15 +121,17 @@ def getStudentByNumber():
         '-cNumber' : changeNumber,
     }
 
+    #* defining Switch function *#
     print(f'there was {foundedStudent.getName()} by that number!\n')
 
+    #* Infinte Loop *#
     def switch(function):
-        return swtichKeys.get(function, lambda: print('This function does not exist, type -h for help!\n'))()
+        return switchKeys.get(function, lambda: print('This function does not exist, type -h for help!\n'))()
 
     while True:
         userInput = input('what you want to do with it (type -h for help)? ');
 
-        if userInput == 'queit' or userInput == 'exit':
+        if userInput == 'exit':
             print('\n')
             break
 
@@ -150,9 +152,8 @@ def exportToTextFile():
 
     print('exported all the data to a textfile! \n\n')
 
-#* Swtich Keys *#
-
-swtichKeys = { 
+#* Switch Keys *#
+switchKeys = { 
     'help': helperFn, # getting help #
     '-h': helperFn,
     'addStudent' : addStudent, # adding student #
@@ -165,17 +166,16 @@ swtichKeys = {
     '-exAll': exportToTextFile,
 }
 
-
+#* defining Switch function *#
 def switch(function):
-    return swtichKeys.get(function, lambda: print('This function does not exist!'))()
+    return switchKeys.get(function, lambda: print('This function does not exist!'))()
 
 
 #* Infinte Loop *#
-
 while True:
     userInput = input('Enter your request (type -h or help for help): ')
 
-    if userInput == 'queit' or userInput == 'exit':
+    if userInput == 'exit':
         break
 
     switch(userInput)
